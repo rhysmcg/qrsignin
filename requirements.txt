@@ -1,2 +1,7 @@
-flask
+Flask
 gunicorn
+Werkzeug
+itsdangerous
+eventlet
+Flask-SocketIO
+click
