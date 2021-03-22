@@ -27,4 +27,5 @@ def sessions():
     return render_template('main.html', ip_address=request.remote_addr)
 
 if __name__ == '__main__':
-	socketio.run(app, debug=True)
+	##socketio.run(app, debug=True)
+	app.run()
