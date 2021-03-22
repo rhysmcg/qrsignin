@@ -1,2 +1,1 @@
-web: gunicorn app:app
-heroku ps:scale web
+web: gunicorn — worker-class eventlet -w 1 app:app
