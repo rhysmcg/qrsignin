@@ -7,5 +7,3 @@ Flask-SocketIO
 click
 Jinja2
 WTForms
-pytz
-wsgiref
