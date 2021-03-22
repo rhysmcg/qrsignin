@@ -3,6 +3,7 @@ gunicorn
 Werkzeug
 itsdangerous
 eventlet
+gevent-websocket
 Flask-SocketIO
 click
 Jinja2
