@@ -20,7 +20,6 @@ def handleMessage(msg):
 		## Swear Alert
 		if word.lower() in swearList:
 			msg = "NO SWEARING"
-
 	send(msg, broadcast=True)
 
 @app.route('/')
@@ -28,5 +27,5 @@ def sessions():
     return render_template('main.html', ip_address=request.remote_addr)
 
 if __name__ == '__main__':
-	socketio.run(app)
+	socketio.run(app, host="0.0.0.0")
 
