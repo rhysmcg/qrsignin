@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, send ##I also needed eventlet
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecret'
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins='*')
 
 ## LOAD IN THE SWEAR LIST
 swearList = []
