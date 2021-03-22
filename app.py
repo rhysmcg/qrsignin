@@ -1,5 +1,5 @@
 from flask import Flask, render_template,request
-from flask_socketio import SocketIO, send ##I also needed eventlet
+from flask_socketio import SocketIO, send
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecret'
@@ -24,7 +24,7 @@ def handleMessage(msg):
 
 @app.route('/')
 def sessions():
-    return render_template('main.html', ip_address=request.remote_addr)
+    return render_template('main.html')
 
 if __name__ == '__main__':
 	##socketio.run(app, debug=True)
