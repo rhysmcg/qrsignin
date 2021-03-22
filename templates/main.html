@@ -7,8 +7,8 @@
 $(document).ready(function() {
 
     // connect to the website of the page's server
-	var socket = io.connect('https://' + document.domain + ':' + location.port);
-	console.log(document.domain + ':' + location.port)
+	//var socket = io.connect('https://' + document.domain + ':' + location.port);
+	var socket = io()
 
 	// If connected, say "user has been connected"
 	socket.on('connect', function() {
