@@ -1,6 +1,9 @@
 from flask import Flask, render_template,request
 from flask_socketio import SocketIO, send
 
+import os
+port = int(os.environ.get('PORT', 5000))
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecret'
 socketio = SocketIO(app, cors_allowed_origins='*')
@@ -27,5 +30,4 @@ def sessions():
     return render_template('main.html')
 
 if __name__ == '__main__':
-	##socketio.run(app, debug=True)
-	app.run()
+	socketio.run(app, host="0.0.0.0",port=port)
