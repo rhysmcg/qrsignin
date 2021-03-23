@@ -1,8 +1,74 @@
 {% extends "base.html" %}
 {% block content %}
-<div>
-	
-	<h1>HI</h1>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    // connect to the website of the page's server
+	var socket = io.connect('https://' + document.domain + ':' + location.port);
+
+	// If connected, say "user has been connected"
+	socket.on('connect', function() {
+		socket.send('User has connected!');
+	});
+
+	// When received a message, put it to the top of the list
+	socket.on('message', function(msg) {
+		$("#messages").append('<li class="list-group-item">'+msg+'</li>');
+
+		if (msg == "change") {
+
+              var c = ["blue", "black", "yellow", "red", "white" ];
+
+              function changeColor() {
+                setTimeout(function loop() {
+                  document.body.style.backgroundColor = c.shift();
+                  if (c.length) {
+                    setTimeout(loop, 500);
+                  }
+                }, 500);
+              }
+
+              function start() {
+                setInterval(changeColor(), 200);
+              }
+
+              start()
+		}
+
+
+		console.log('Received message');
+	});
+
+	// Send the input of myMessage
+	// Change the input to be blank
+
+	$('#sendbutton').on('click', function() {
+		socket.send($('#myMessage').val());
+		$('#myMessage').val('');
+	});
+
+	// ENTER BUTTON
+    document.querySelector("#myMessage").addEventListener("keyup", event => {
+    if(event.key !== "Enter") return;
+    document.querySelector("#sendbutton").click(); // Things you want to do.
+    event.preventDefault(); //
+});
+
+});
+</script>
+<div class="container">
+<ul class="list-group" id="messages"></ul>
+    </p><p/></p>
+
+
+    <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Chat here" id="myMessage">
+  <button class="btn btn-outline-secondary" id="sendbutton" type="button">Send</button>
+</div>
+
 
 </div>
 {% endblock %}
