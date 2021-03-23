@@ -1,9 +1,6 @@
 from flask import Flask, render_template,request
 from flask_socketio import SocketIO, send
 
-import os
-port = int(os.environ.get('PORT', 5000))
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecret'
 socketio = SocketIO(app, cors_allowed_origins='*')
