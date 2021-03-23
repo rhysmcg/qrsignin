@@ -1,30 +1,21 @@
-from flask import Flask, render_template,request
-from flask_socketio import SocketIO, send
+from flask import Flask, render_template, request  # importing Flask class
+app = Flask(__name__)  # setting this variable to __name__ which is used to set the main app
+from datetime import date
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'mysecret'
-socketio = SocketIO(app, cors_allowed_origins='*')
+# - - - - - - route decorators - - - - - - - - - - - - -
 
-## LOAD IN THE SWEAR LIST
-swearList = []
-with open ("swearlist.txt", 'r') as swearfile:
-	for line in swearfile:
-		swearList.append(line.strip())
-
-@socketio.on('message')
-def handleMessage(msg):
-	print('Message: ' + msg)
-
-	## If you say a word from the list, say "No Swearing"
-	for word in msg.split(' '):
-		## Swear Alert
-		if word.lower() in swearList:
-			msg = "NO SWEARING"
-	send(msg, broadcast=True)
+@app.route('/generate')
+def today():
+    today="Tuesday"
+    return render_template("main.html", name=today)
 
 @app.route('/')
-def sessions():
-    return render_template('main.html')
+def index():
+    name = "Jack"
+    return render_template("main.html", name=name)
+
 
 if __name__ == '__main__':
-	socketio.run(app)
+    app.run(host="0.0.0.0")
+
+## https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
