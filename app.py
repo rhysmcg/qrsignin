@@ -5,6 +5,7 @@ import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecret'
 socketio = SocketIO(app, cors_allowed_origins='*')
+port = int(os.environ.get("PORT", 5000))
 
 ## LOAD IN THE SWEAR LIST
 swearList = []
@@ -26,9 +27,8 @@ def handleMessage(msg):
 
 @app.route('/')
 def sessions():
-    return render_template('main.html', ip_address=request.remote_addr)
+    return render_template('main.html', ip_address=request.remote_addr, port=port)
 
 if __name__ == '__main__':
-	port = int(os.environ.get("PORT", 5000))
 	socketio.run(app, host="0.0.0.0",port=port)
 
