@@ -1,2 +1,2 @@
-web: gunicorn --worker-class socketio.sgunicorn.GeventSocketIOWorker --log-file=- app:app
+web: gunicorn -k eventlet app:app
 heroku ps:scale web=1
