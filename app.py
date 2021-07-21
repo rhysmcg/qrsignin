@@ -41,6 +41,7 @@ def checkedin():
         if result != None:
             student = result[1] + ' ' + result[0]
             query = f"INSERT INTO SignedIn VALUES('{student_id}', '{date}', '{time}', '{room}')"
+            print(student_id, date, time, room)
             cur.execute(query)
             con.commit()
     else:
